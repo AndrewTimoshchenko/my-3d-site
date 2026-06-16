@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Технічний аналіз: Geran-5</title>
+    <style>
+        /* ГЛОБАЛЬНІ ЗМІННІ ДЛЯ ТЕМНОЇ ТЕМИ (За замовчуванням) */
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #11141a;
+            --text-main: #c5c6c7;
+            --text-bright: #ffffff;
+            --danger-color: #ff4d4d;
+            --header-bg: rgba(11, 12, 16, 0.8);
+            --table-bg: rgba(31, 40, 51, 0.4);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --shadow-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* ЗМІННІ ДЛЯ СВІТЛОЇ ТЕМИ */
+        [data-theme="light"] {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #4a5568;
+            --text-bright: #1a202c;
+            --danger-color: #d93838;
+            --header-bg: rgba(244, 246, 249, 0.8);
+            --table-bg: rgba(226, 232, 240, 0.7);
+            --border-color: rgba(0, 0, 0, 0.08);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header {
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: background 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--text-bright);
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--danger-color);
+        }
+
+        /* КНОПКА ПЕРЕМИКАННЯ ТЕМИ */
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-bright);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: translateY(-1px);
+            border-color: var(--danger-color);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 120px auto 60px auto;
+            padding: 0 20px;
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 968px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ВІКНО ПЕРЕГЛЯДУ З АДАПТИВНИМ ПРОЗОРИМ ФОНОМ */
+        .viewer-box {
+            background: transparent; 
+            border-radius: 16px;
+            overflow: hidden;
+            height: 550px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px var(--shadow-color);
+            position: relative;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .viewer-box iframe {
+            width: 100%;
+            height: calc(100% + 105px); 
+            border: 0;
+            margin-top: -55px; 
+            display: block;
+        }
+
+        .viewer-hint {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--text-main);
+            pointer-events: none;
+            z-index: 15;
+            letter-spacing: 0.5px;
+        }
+
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-panel h1 {
+            font-size: 2.5rem;
+            color: var(--text-bright);
+            margin: 0 0 10px 0;
+        }
+
+        .info-panel .subtitle {
+            color: var(--danger-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .info-panel p {
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--table-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        .specs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .specs-table td.label {
+            width: 40%;
+        }
+
+        .specs-table td.value {
+            color: var(--text-bright);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        footer {
+            margin-top: 100px;
+            border-top: 1px solid var(--border-color);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">MIL-TECH <span>ANALYSIS</span></div>
+            <!-- Кнопка зміни теми -->
+            <button class="theme-toggle-btn" id="themeToggle">
+                <span id="themeIcon">☀️</span> <span id="themeText">Світла тема</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="viewer-box">
+                <div class="viewer-hint">✦ 3D ВІЗУАЛІЗАЦІЯ (ПРОЗОРИЙ ФОН)</div>
+                <!-- Оновлений iframe з новим ID моделі (Geran-5) -->
+                <iframe 
+                    title="Geran-5" 
+                    allowfullscreen 
+                    mozallowfullscreen="true" 
+                    webkitallowfullscreen="true" 
+                    allow="autoplay; fullscreen; xr-spatial-tracking" 
+                    xr-spatial-tracking 
+                    src="https://sketchfab.com/models/33073861b6a24233b0777cf56d1fc741/embed?autospin=0&autostart=1&preload=1&transparent=1&ui_hint=0&ui_infos=0&ui_controls=0&ui_stop=0&ui_watermark=0">
+                </iframe>
+            </div>
+
+            <div class="info-panel">
+                <h1>Geran-5</h1>
+                <div class="subtitle">Аналіз модифікації</div>
+                <p>
+                    Інтерактивна тривимірна модель БПЛА. Весь сторонній інтерфейс плеєра приховано, а фон залишається повністю адаптивним і прозорим, підлаштовуючись під тему сайту.
+                </p>
+
+                <table class="specs-table">
+                    <tr>
+                        <td class="label">Концепт об'єкта</td>
+                        <td class="value">Geran-5 (БПЛА)</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Керування</td>
+                        <td class="value">Інтерактивне (Миша / Сенсор)</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Інтерфейс</td>
+                        <td class="value">Повністю очищений (Кастомний)</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Адаптація тла</td>
+                        <td class="value">Прозорий (Злиття з сайтом)</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MIL-TECH Оновлена модель Geran-5.</p>
+    </footer>
+
+    <!-- Скрипт для логіки перемикання теми -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Світла тема';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Темна тема';
+            }
+        });
+    </script>
+
+</body>
+</html>
