@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geran-5 3D Viewer</title>
+    <title>3D Presentation Viewer</title>
     <style>
         /* ГЛОБАЛЬНІ ЗМІННІ ДЛЯ ТЕМНОЇ ТЕМИ */
         :root {
@@ -27,14 +27,13 @@
             background-color: var(--bg-color);
             color: var(--text-bright);
             font-family: 'Segoe UI', Roboto, sans-serif;
-            overflow: hidden; /* Ховаємо смуги прокрутки сторінки */
+            overflow: hidden;
             height: 100vh;
             display: flex;
             flex-direction: column;
             transition: background-color 0.3s ease;
         }
 
-        /* МІНІМАЛІСТИЧНИЙ ХЕДЕР */
         header {
             position: absolute;
             top: 0;
@@ -46,7 +45,7 @@
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            pointer-events: none; /* Щоб кліки крізь хедер проходили до моделі */
+            pointer-events: none;
         }
 
         .logo {
@@ -57,7 +56,6 @@
             text-transform: uppercase;
         }
 
-        /* КНОПКА ПЕРЕМИКАННЯ ТЕМИ */
         .theme-toggle-btn {
             background: var(--btn-bg);
             border: 1px solid var(--border-color);
@@ -68,7 +66,7 @@
             font-weight: 600;
             font-size: 0.85rem;
             backdrop-filter: blur(10px);
-            pointer-events: auto; /* Повертаємо клікабельність кнопці */
+            pointer-events: auto;
             transition: all 0.2s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
@@ -78,7 +76,6 @@
             border-color: var(--text-bright);
         }
 
-        /* ГОРДОСТЬ САЙТУ: ВІКНО МОДЕЛІ НА ВЕСЬ ЕКРАН */
         .viewer-container {
             width: 100vw;
             height: 100vh;
@@ -89,14 +86,12 @@
 
         .viewer-container iframe {
             width: 100%;
-            /* Робимо iframe вищим, щоб надійно обрізати системні бари Sketchfab */
             height: calc(100% + 120px);
             border: 0;
-            margin-top: -60px; /* Виштовхуємо верхній бар за межі екрана */
+            margin-top: -60px;
             display: block;
         }
 
-        /* ТЕКСТОВА ПІДКАЗКА ЗНИЗУ */
         .bottom-hint {
             position: absolute;
             bottom: 25px;
@@ -115,7 +110,7 @@
 <body>
 
     <header>
-        <div class="logo">GERAN-5</div>
+        <div class="logo">3D Presentation</div>
         <button class="theme-toggle-btn" id="themeToggle">
             <span id="themeIcon">☀️</span> <span id="themeText">Світла тема</span>
         </button>
@@ -123,13 +118,13 @@
 
     <div class="viewer-container">
         <iframe 
-            title="Geran-5" 
+            title="Presentation" 
             allowfullscreen 
             mozallowfullscreen="true" 
             webkitallowfullscreen="true" 
             allow="autoplay; fullscreen; xr-spatial-tracking" 
             xr-spatial-tracking 
-            src="https://sketchfab.com/models/33073861b6a24233b0777cf56d1fc741/embed?autospin=0&autostart=1&preload=1&transparent=1&ui_hint=0&ui_infos=0&ui_controls=0&ui_stop=0&ui_watermark=0">
+            src="https://sketchfab.com/models/d56da9a1cadf406fa4006ce99b1ad5bd/embed?autospin=0&autostart=1&preload=1&transparent=1&ui_hint=0&ui_infos=0&ui_controls=0&ui_stop=0&ui_watermark=0">
         </iframe>
     </div>
 
