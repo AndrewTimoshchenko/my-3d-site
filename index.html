@@ -76,6 +76,7 @@
             border-color: var(--text-bright);
         }
 
+        /* КОНТЕЙНЕР ДЛЯ МОДЕЛІ */
         .viewer-container {
             width: 100vw;
             height: 100vh;
@@ -84,12 +85,41 @@
             overflow: hidden;
         }
 
+        /* Налаштування для комп'ютерів (залишаємо повне маскування) */
         .viewer-container iframe {
             width: 100%;
             height: calc(100% + 120px);
             border: 0;
             margin-top: -60px;
             display: block;
+        }
+
+        /* 📱 МОБІЛЬНА ОПТИМІЗАЦІЯ (ДЛЯ СМАРТФОНІВ У ВЕРТИКАЛЬНОМУ РЕЖИМІ) */
+        @media (max-width: 767px) and (orientation: portrait) {
+            .viewer-container iframe {
+                /* Повертаємо iframe в межі екрана, щоб інтерфейс і вікна опису не обрізалися */
+                height: 100%;
+                margin-top: 0;
+            }
+
+            header {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+
+            .theme-toggle-btn {
+                padding: 8px 14px;
+                font-size: 0.75rem;
+            }
+
+            .bottom-hint {
+                bottom: 15px;
+                font-size: 0.7rem;
+            }
         }
 
         .bottom-hint {
