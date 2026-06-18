@@ -115,7 +115,6 @@
                 margin-top: 0;
             }
 
-            /* Активуємо маску, що закриває нижні кнопки скетчфаба */
             .mobile-mask {
                 display: block;
             }
@@ -124,24 +123,24 @@
                 padding: 15px 20px;
             }
 
-            /* Переміщуємо кнопку зміни теми в самий низ екрана, поверх нашої маски */
+            /* Переміщуємо кнопку зміни теми в лівий нижній куток, поверх нашої маски */
             .theme-toggle-btn {
                 position: absolute;
                 bottom: 8px;
-                left: 50%;
-                transform: translateX(-50%);
+                left: 15px;
+                transform: none;
                 padding: 6px 14px;
                 font-size: 0.75rem;
-                z-index: 20; /* Кнопка лягає поверх маски */
+                z-index: 20; 
                 white-space: nowrap;
             }
 
             .theme-toggle-btn:hover {
-                transform: translateX(-50%) scale(1.03);
+                transform: scale(1.03);
             }
 
             .bottom-hint {
-                display: none; /* Ховаємо підказку, бо там тепер кнопка */
+                display: none; 
             }
         }
 
@@ -164,14 +163,12 @@
 
     <header>
         <div class="logo">3D Presentation</div>
-        <!-- Кнопка зміни теми -->
         <button class="theme-toggle-btn" id="themeToggle">
             <span id="themeIcon">☀️</span> <span id="themeText">Світла тема</span>
         </button>
     </header>
 
     <div class="viewer-container">
-        <!-- Маска для блокування нижнього бару на телефонах -->
         <div class="mobile-mask"></div>
 
         <iframe 
