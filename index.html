@@ -98,7 +98,7 @@
         /* Заглушка, яка ховає нижній інтерфейс на мобільних */
         .mobile-mask {
             display: none;
-            position: fixed; /* Змінено на fixed для стабільності на iOS */
+            position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
@@ -123,9 +123,9 @@
                 padding: 15px 20px;
             }
 
-            /* Жорстка фіксація кнопки внизу ліворуч */
+            /* Жорстка фіксація кнопки внизу ліворуч на мобільних */
             .theme-toggle-btn {
-                position: fixed; /* Тепер кнопка прив'язана до нижнього краю екрана браузера */
+                position: fixed;
                 bottom: 10px;
                 left: 15px;
                 transform: none;
@@ -171,6 +171,7 @@
     <div class="viewer-container">
         <div class="mobile-mask"></div>
 
+        <!-- Оновлений iframe з новим посиланням моделі -->
         <iframe 
             title="Presentation" 
             allowfullscreen 
@@ -178,7 +179,7 @@
             webkitallowfullscreen="true" 
             allow="autoplay; fullscreen; xr-spatial-tracking" 
             xr-spatial-tracking 
-            src="https://sketchfab.com/models/d56da9a1cadf406fa4006ce99b1ad5bd/embed?autospin=0&autostart=1&preload=1&transparent=1&ui_hint=0&ui_infos=0&ui_controls=0&ui_stop=0&ui_watermark=0">
+            src="https://sketchfab.com/models/05953ce1cf2348d3972912a85906e1a4/embed?autospin=0&autostart=1&preload=1&transparent=1&ui_hint=0&ui_infos=0&ui_controls=0&ui_stop=0&ui_watermark=0">
         </iframe>
     </div>
 
